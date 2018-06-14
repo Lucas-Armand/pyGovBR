@@ -1,3 +1,13 @@
-# PyGovAnalytic
+# PyGovBR - WebScrapping e Machine Learning em Compras Públicas
 
-Projeto tem como objetivo construir uma biblioteca python para analise de dados sobre empresas que fornecem para o governo e as unidades adiministrativas do governo. Usando como base de dados os portais de transparência, API e os portais de compras em si. O objetivo principal é do projeto é construir uma ferramente que permita o usuário a ter uma visão de mercado a partir dos dados abertos, seja focando em uma empresa, focando em uma unidade do governo, focando em uma região ou em um tipo de produto/serviço. 
+Esse projeto é uma biblioteca em python para coleta e analise de dados de compras públicas dos governos federal, estadual e municipal de todo o Brasil. 
+
+A idéia é construir um programa aonde o usuário possa buscar informações sobre as unidades do governo, produtos/serviços licitados e as empresas fornecedoras. A partir disso o programa acessa as bases de dados dos portais de transparência, API's do próprio Estado e os portais de compras em si e depois processa esse dados para extrair resultados estruturados. Os resultados são expostos como resposta à busca, mas, ao mesmo tempo, são armazenados em uma base única de dados abertos e ficam disponíveis para futuras consultas.
+
+O principal objetivo desse projeto é que os indivíduos, dentro e fora do governo, possam usar os dados públicos como suporte a tomada de decisões e, dessa maneira, possam tomar decisões mais acertivas. 
+
+# Organização do Projeto
+O projeto esta divido em três principais módulos:
+-> UASG
+-> Fornecedor
+-> Analitic 
