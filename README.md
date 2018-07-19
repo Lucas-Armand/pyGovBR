@@ -1,13 +1,108 @@
-# PyGovBR - WebScrapping e Machine Learning em Compras Públicas
+# Carandá Analitycs - WebScrapping, Data Exploring e Machine Learning em Compras Públicas
 
-Esse projeto é uma biblioteca em python para coleta e analise de dados de compras públicas dos governos federal, estadual e municipal de todo o Brasil. 
+O objetivo desse projeto é construir uma ferramenta que possa auxiliar as empresas a participarem das licitações de forma mais efetiva. O estudo do mercado nos mostrou duas grandes barreira para pequenas empresas. A primeira barreira de é barreira de conhecimento. Para isso estamos desenvolvendo ferramentas (Carandá Analytics) que auxiliem o empreendedor entender quais são as características do mercado que ele quer atuar e o ajudem a tomar decisão mais assertivas. A segunda barreira é a burocrática. Para isso desenvolvemos ferramentas (Carandá Bots) de automação das etapas da licitação (cadastramento, busca de oportunidade, participação do certame) para diminuir a desvantagem do pequeno empreendedor para com o grande empreendedor (que tem uma equipe de compras públicas).
 
-A idéia é construir um programa aonde o usuário possa buscar informações sobre as unidades do governo, produtos/serviços licitados e as empresas fornecedoras. A partir disso o programa acessa as bases de dados dos portais de transparência, API's do próprio Estado e os portais de compras em si e depois processa esse dados para extrair resultados estruturados. Os resultados são expostos como resposta à busca, mas, ao mesmo tempo, são armazenados em uma base única de dados abertos e ficam disponíveis para futuras consultas.
+## Ferramentas
 
-O principal objetivo desse projeto é que os indivíduos, dentro e fora do governo, possam usar os dados públicos como suporte a tomada de decisões e, dessa maneira, possam tomar decisões mais acertivas. 
+* Anaconda (3.6.5) 
+* Mongo (4.0.0) 
+* pymongo (3.8.0) 
+* Django (2.0.7) 
+* djongo (1.2.29)
+* git
+# Montando o Ambiente
 
-# Organização do Projeto
-O projeto esta divido em três principais módulos:
--> UASG
--> Fornecedor
--> Analitic 
+Um rápido tutorial para começar a trabalhar no projeto. !!!Atenção!!! Precisa ser testado.
+
+## Usando bash
+
+A maneira mais fácil de fazer instalação de todas as ferramentas nas versões corretas e criar o ambiente virtual é executando o script [bash](https://github.com/Lucas-Armand/pyGovBR/blob/master/env_script.sh) na raiz (Ubuntu 16.04):
+
+```
+sudo bash env_script.sh
+```
+
+## Manualmente:
+
+### Install Anaconda:
+
+```
+get "https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh"
+bash ./Anaconda3-5.2.0-Linux-x86_64.sh -b
+
+```
+### Install Mongo:
+
+```
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+
+```
+
+### Criando Ambiente no Conda:
+
+```
+conda create --name caranda -y
+
+```
+
+### Acessando Ambiente Caranda
+
+```
+source activate caranda
+
+```
+
+### Install pip3
+
+```
+sudo apt-get install python3-pip -y
+pip3 install --upgrade pip
+
+```
+
+### Instal PyMongo
+
+```
+sudo pip3 install pymongo
+
+```
+
+### Install Django
+
+```
+pip3 install Django
+
+```
+
+### Install Djongo
+
+```
+pip3 install djongo
+
+```
+
+### Cloning Project:
+
+```
+git clone https://github.com/Lucas-Armand/pyGovBR.git
+
+
+```
+
+### Executing mongod
+
+```
+sudo service mongod start
+
+```
+
+### Executando Django
+
+```
+cd pyGovBR/PubMark
+python manage.py runserver
+
+```
