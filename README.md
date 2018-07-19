@@ -1,13 +1,4 @@
-# PyGovBR - WebScrapping e Machine Learning em Compras Públicas
+# Carandá Analitycs - WebScrapping, Data Exploring e Machine Learning em Compras Públicas
 
-Esse projeto é uma biblioteca em python para coleta e analise de dados de compras públicas dos governos federal, estadual e municipal de todo o Brasil. 
+O objetivo desse projeto é construir uma ferramenta que possa auxiliar as empresas a participarem das licitações de forma mais efetiva. O estudo do mercado nos mostrou duas grandes barreira para pequenas empresas. A primeira barreira de é barreira de  conhecimento. Para isso estamos desenvolvendo ferramentas (Carandá Analytics) que auxiliem o empreendedor enteder quais são as caracteristicas do mercado que ele quer atuar e o ajudem a tomar decisõe mais acertivas. A segunda barreira é a burocratica. Para isso desenvolveremos ferramentas (Carandá Bots) de automação das etapas da licitação (cadastramento, busca de oportunidade, participação do certame) para diminuir a desvantagem do pequeno empreendedor para com o grande empreendedor (que tem uma equipe de compras públicas). 
 
-A idéia é construir um programa aonde o usuário possa buscar informações sobre as unidades do governo, produtos/serviços licitados e as empresas fornecedoras. A partir disso o programa acessa as bases de dados dos portais de transparência, API's do próprio Estado e os portais de compras em si e depois processa esse dados para extrair resultados estruturados. Os resultados são expostos como resposta à busca, mas, ao mesmo tempo, são armazenados em uma base única de dados abertos e ficam disponíveis para futuras consultas.
-
-O principal objetivo desse projeto é que os indivíduos, dentro e fora do governo, possam usar os dados públicos como suporte a tomada de decisões e, dessa maneira, possam tomar decisões mais acertivas. 
-
-# Organização do Projeto
-O projeto esta divido em três principais módulos:
--> UASG
--> Fornecedor
--> Analitic 
