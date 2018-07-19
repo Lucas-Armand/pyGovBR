@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import Uasg, Fornecedor, Pregao
 
-# Register your models here.
+admin.site.register([Uasg, Fornecedor, Pregao])
