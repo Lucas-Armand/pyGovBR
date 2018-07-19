@@ -12,7 +12,7 @@ O objetivo desse projeto é construir uma ferramenta que possa auxiliar as empre
 * git
 # Montando o Ambiente
 
-Um rápido tutorial para começar a trabalhar no projeto
+Um rápido tutorial para começar a trabalhar no projeto. !!!Atenção!!! Precisa ser testado.
 
 ## Usando bash
 
