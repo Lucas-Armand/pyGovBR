@@ -1,4 +1,4 @@
-	# Carandá Analitycs - WebScrapping, Data Exploring e Machine Learning em Compras Públicas
+# Carandá Analitycs - WebScrapping, Data Exploring e Machine Learning em Compras Públicas
 
 O objetivo desse projeto é construir uma ferramenta que possa auxiliar as empresas a participarem das licitações de forma mais efetiva. O estudo do mercado nos mostrou duas grandes barreira para pequenas empresas. A primeira barreira de é barreira de  conhecimento. Para isso estamos desenvolvendo ferramentas (Carandá Analytics) que auxiliem o empreendedor enteder quais são as caracteristicas do mercado que ele quer atuar e o ajudem a tomar decisõe mais acertivas. A segunda barreira é a burocratica. Para isso desenvolveremos ferramentas (Carandá Bots) de automação das etapas da licitação (cadastramento, busca de oportunidade, participação do certame) para diminuir a desvantagem do pequeno empreendedor para com o grande empreendedor (que tem uma equipe de compras públicas). 
 
@@ -25,40 +25,84 @@ sudo bash env_script.sh
 ## Manualmente:
 
 ### Install Anaconda:
+
+```
 get "https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh"
 bash ./Anaconda3-5.2.0-Linux-x86_64.sh -b
 
+```
 ### Install Mongo:
+
+```
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
 sudo apt-get update
 sudo apt-get install -y mongodb-org
 
+```
+
 ### Criando Ambiente no Conda:
+
+```
 conda create --name caranda -y
 
+```
+
 ### Acessando Ambiente Caranda
+
+```
 source activate caranda
 
+```
+
 ### Install pip3
+
+```
 sudo apt-get install python3-pip -y
 pip3 install --upgrade pip
 
+```
+
 ### Instal PyMongo
+
+```
 sudo pip3 install pymongo
 
+```
+
 ### Install Django
+
+```
 pip3 install Django
 
+```
+
 ### Install Djongo
+
+```
 pip3 install djongo
 
+```
+
 ### Cloning Project:
+
+```
 git clone https://github.com/Lucas-Armand/pyGovBR.git
 
+
+```
+
 ### Executing mongod
+
+```
 sudo service mongod start
 
+```
+
 ### Executando Django
+
+```
 cd pyGovBR/PubMark
 python manage.py runserver
+
+```
