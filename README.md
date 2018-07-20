@@ -38,65 +38,55 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD7
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
 sudo apt-get update
 sudo apt-get install -y mongodb-org
-
 ```
 
 ### Criando Ambiente no Conda:
 
 ```
 conda create --name caranda -y
-
 ```
 
 ### Acessando Ambiente Caranda
 
 ```
 source activate caranda
-
 ```
 
 ### Install pip3
 
 ```
-sudo apt-get install python3-pip -y
+sudo apt-get install python3-pip
 pip3 install --upgrade pip
-
 ```
 
 ### Instal PyMongo
 
 ```
 sudo pip3 install pymongo
-
 ```
 
 ### Install Django
 
 ```
 pip3 install Django
-
 ```
 
 ### Install Djongo
 
 ```
 pip3 install djongo
-
 ```
 
 ### Cloning Project:
 
 ```
 git clone https://github.com/Lucas-Armand/pyGovBR.git
-
-
 ```
 
 ### Executing mongod
 
 ```
 sudo service mongod start
-
 ```
 
 ### Executando Django
@@ -104,5 +94,22 @@ sudo service mongod start
 ```
 cd pyGovBR/PubMark
 python manage.py runserver
-
 ```
+# Organização do Projeto
+
+O projeto Carandá Analytics é dividido em tuas partes principais, Capitação de Dados e API de Dados + Analytics.
+
+### Capitação de dados - WebScraping e WebCrawling
+
+O primeiro desafio do projeto é a construção de uma base de dados que seja representativa dos fornecedores que desejamos analizar. Isso sigifica quem alem de integrar o projeto as principais API é necessário ter caplaridade para acessar os diversos portais de prefeituras, empresas estatais e etc. A proposta inicial é que os acessos dos usuários aos portais e API sejam armazenados e isso alimente o banco de dados.
+
+No futuro deve-se existir um manual de como integrar um novo portal á plataforma. 
+
+Uma lista das bases de dados já sincronizadas até agora:
+
+- [x] API de dados do Governo
+- [ ] API do Estado de São Paulo
+
+### API de Dados e Anlytics - MongoDB e BI
+
+O segundo desafio é, uma vez que 
