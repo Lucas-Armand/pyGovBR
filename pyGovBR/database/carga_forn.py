@@ -1,5 +1,7 @@
 import pandas as pd
 import json
+
+# Esse método recebe um dicionário e transforma em uma lista
 def jsonReconstruct(jsonDict):
     keys =  jsonDict.keys()
     if '_embedded' in keys:
@@ -15,14 +17,28 @@ def jsonReconstruct(jsonDict):
         jsonList = [jsonDict]
     return(jsonList)
 
+# URL para acesso aos dados (usar offset para variar)
 url = 'http://compras.dados.gov.br/fornecedores/v1/fornecedores.json?uf='
-r = requests.get(url)
-s = r.text
-l = s.split('{"id"')
-l.pop(0)  # Removendo primeiro item  = cabeçalho
-l[-1] = l[-1][:-17] #Removendo 'resto' no ultimo item = contador de itens 
-l = ['{"id"'+i[:-1] for i in l] # adicionando '{"id"' que se perdeu no split
 
+# Fazendo o request do servidor
+r = requests.get(url)
+
+# O resultado é guardado como uma string(s) 
+s = r.text
+
+# Agora eu vou "quebrar" a string em uma lista de strings com o split"
+l = s.split('{"id"')
+
+# Removendo primeiro item  = cabeçalho
+l.pop(0)  
+
+#Removendo 'resto' no ultimo item = contador de itens 
+l[-1] = l[-1][:-17]
+
+# adicionando '{"id"' que se perdeu no split
+l = ['{"id"'+i[:-1] for i in l]
+
+# Agora vou iniciar um loop para editar essas strings
 count = 0
 L = [] # lista final
 for i in l:
@@ -32,10 +48,10 @@ for i in l:
         "pk": count,
         "fields": jsonDict
         }
-    L.append(json.dumps(obj))
-    count +=1]
+    L.append(obj)
+    count +=1
 
 f = open('fornfixture.json','w')
-f.write(str(L))
+f.write(json.dumps(L))
 f.close()
 
