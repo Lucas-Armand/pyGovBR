@@ -108,7 +108,7 @@ No futuro deve-se existir um manual de como integrar um novo portal á plataform
 Uma lista das bases de dados já sincronizadas até agora:
 
 - [x] API de dados do Governo
-- [] API do Estado de São Paulo
+- [ ] API do Estado de São Paulo
 
 ### API de Dados e Anlytics - MongoDB e BI
 
