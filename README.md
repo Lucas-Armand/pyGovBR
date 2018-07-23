@@ -125,3 +125,22 @@ No futuro devemos ter um passo a passo de como gerar as primeiras visualizaçõe
 A seguir segue o rascunho de como seria o sistema que pensamos durante o nosso pequeno "braimstorm". A figura representa o (de forma bem básica) o fluxo de informação dentro do sistema e os "codigos" aonde as informações serão processadas, tambem divide a parte que seria referente á API de dados (usuário comum) e a parte referente ao WebScrapping (usuário desenvolvedor). Ela também sinaliza quais partes do trabalho estão mais relacionadas as principais ferramentas do projeto (Django, Mongo e Bilbiotecas de Dados do Python).
 
 ![rascunho do sistema](https://github.com/Lucas-Armand/pyGovBR/blob/master/img/rascunho_caranda.jpeg)
+
+# Referências:
+
+lista de referências utilizadas durante o aprendizado e/ou para cosultas futuras das feramentas utilixadas no projeto:
+mongo:
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#start-mdb-edition-from-the-command-interpreter
+http://jordankobellarz.github.io/mongodb/2015/08/15/mentiras-que-lhe-contaram-sobre-o-mongodb.html
+https://blog.umbler.com/br/boas-praticas-com-mongodb/
+https://nesdis.github.io/djongo/different-ways-to-integrate-django-with-mongodb/
+https://www.irit.fr/publis/SIG/2015_DAWAK_CEKTT.pdf
+http://www.academia.edu/16859114/Benchmark_for_OLAP_on_NoSQL_Technologies_Comparing
+Django
+https://www.quora.com/How-can-I-use-MongoDB-and-a-relational-RDBMS-in-my-Django-website
+https://djangobook.com/model-view-controller-design-pattern/
+https://docs.djangoproject.com/en/2.0/intro/tutorial01/
+pycharm
+https://www.jetbrains.com/help/pycharm-edu/adding-existing-virtual-environment.html
+py
+https://www.fullstackpython.com/enterprise-python.html
