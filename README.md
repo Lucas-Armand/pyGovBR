@@ -112,4 +112,16 @@ Uma lista das bases de dados já sincronizadas até agora:
 
 ### API de Dados e Anlytics - MongoDB e BI
 
-O segundo desafio é, uma vez que 
+O segundo desafio é, uma vez que se forme uma base de dados, disponibilizar o acesso desses dados para os usuários e fazer isso de maneira a garantir a intregação desses dados com outras bibliotecas python. Alem disso produzir alguns relatóŕios automáticos usando a própria API.
+
+No futuro devemos ter um passo a passo de como gerar as primeiras visualizações de dados
+
+- [ ] DashBorad de Compras públicas 
+- [ ] Mapa de Oporunidades Futuras
+- [ ] Rede de Mercado
+
+## Sistema Proposto:
+
+A seguir segue o rascunho de como seria o sistema que pensamos durante o nosso pequeno "braimstorm". A figura representa o (de forma bem básica) o fluxo de informação dentro do sistema e os "codigos" aonde as informações serão processadas, tambem divide a parte que seria referente á API de dados (usuário comum) e a parte referente ao WebScrapping (usuário desenvolvedor). Ela também sinaliza quais partes do trabalho estão mais relacionadas as principais ferramentas do projeto (Django, Mongo e Bilbiotecas de Dados do Python).
+
+![rascunho do sistema](https://github.com/Lucas-Armand/pyGovBR/blob/master/img/rascunho_caranda.jpeg)
