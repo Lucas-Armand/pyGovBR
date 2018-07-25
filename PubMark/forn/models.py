@@ -33,30 +33,44 @@ UF_LIST = (
 
     )
 
+
+
 class Uasg(models.Model):
-    _id = models.ObjectIdField()
-    codigo = models.CharField(max_length=10)
+    id = models.ObjectIdField()
     nome = models.CharField(max_length=200)
-    uf = models.CharField(max_length=3, choices=UF_LIST)
+    id_orgao = models.IntegerField(blank=True, null=True)
+    id_municipio = models.IntegerField(blank=True, null=True)
+    cep = models.CharField(max_length=20)
+    total_fornecedores_cadastrados = models.IntegerField(blank=True, null=True)
+    total_fornecedores_cadastrados = models.IntegerField(blank=True, null=True)
+    unidade_cadastradora = models.BooleanField(default=False)
+    ativo = models.BooleanField(default=False)
+
 
 class Fornecedor(models.Model):
-    _id = models.ObjectIdField()
+    id = models.ObjectIdField()
     cnpj = models.CharField(max_length=20)
     nome = models.CharField(max_length=200)
+    ativo = models.BooleanField(default=False)
+    recadastrado = models.BooleanField(default=False)
+    id_municipio = models.IntegerField(blank=True, null=True)
     uf = models.CharField(max_length=3, choices=UF_LIST)
-    porte = models.CharField(max_length=20)
+    id_natureza_juridica = models.IntegerField(blank=True, null=True)
+    id_porte_empresa = models.IntegerField(blank=True, null=True)
+    id_ramo_negocio = models.IntegerField(blank=True, null=True)
+    id_cnae = models.IntegerField(blank=True, null=True)
+    id_unidade_cadastradora = models.IntegerField(blank=True, null=True)
+    habilitado_licitar = models.BooleanField(default=False)
 
-class Pregao(models.Model):
-    _id = models.ObjectIdField()
+class Declaracao(models.Model):
+    id = models.ObjectIdField()
     numero = models.CharField(max_length=10)
-    uasg = models.ForeignKey(Uasg, on_delete=models.CASCADE)
-    fornecedor = models.ArrayReferenceField(
+    id_uasg = models.ForeignKey(Uasg, on_delete=models.CASCADE)
+    id_fornecedor = models.ArrayReferenceField(
         to=Fornecedor,
         on_delete=models.CASCADE,
     )
-    declaracaoIndependente = models.BooleanField
-    declaracaoInfantil = models.BooleanField
-    declaracaosuperveniente = models.BooleanField
+
 
 
 
