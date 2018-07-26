@@ -129,18 +129,35 @@ A seguir segue o rascunho de como seria o sistema que pensamos durante o nosso p
 # Referências:
 
 lista de referências utilizadas durante o aprendizado e/ou para cosultas futuras das feramentas utilixadas no projeto:
-mongo:
+### Mongo:
 https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/#start-mdb-edition-from-the-command-interpreter
 http://jordankobellarz.github.io/mongodb/2015/08/15/mentiras-que-lhe-contaram-sobre-o-mongodb.html
 https://blog.umbler.com/br/boas-praticas-com-mongodb/
 https://nesdis.github.io/djongo/different-ways-to-integrate-django-with-mongodb/
 https://www.irit.fr/publis/SIG/2015_DAWAK_CEKTT.pdf
 http://www.academia.edu/16859114/Benchmark_for_OLAP_on_NoSQL_Technologies_Comparing
-Django
+### Django
 https://www.quora.com/How-can-I-use-MongoDB-and-a-relational-RDBMS-in-my-Django-website
 https://djangobook.com/model-view-controller-design-pattern/
 https://docs.djangoproject.com/en/2.0/intro/tutorial01/
-pycharm
+### pycharm
 https://www.jetbrains.com/help/pycharm-edu/adding-existing-virtual-environment.html
-py
+### py
 https://www.fullstackpython.com/enterprise-python.html
+### Pitch
+
+Estudo sobre as distribuições das pequenas empresas no brasil (faturamento, etc...):
+http://www.sebrae.com.br/Sebrae/Portal%20Sebrae/Anexos/As_pequenas_empresas_SN.pdf
+
+Dados de cadastrado de fornecedores 1991-2014 Governo Federal:
+http://comprasnet.gov.br/ajuda/siasg/numeros/GraficoTipo.asp
+
+Dados da secrataria de fazenda de São Paulo (2017):
+https://drive.google.com/file/d/1mt3X8Y6HqmSbsCQWBFysFap0uvyevnE3/view
+
+Dados das participação das Pequenas empresas no Brasil:
+http://www.sebrae.com.br/Sebrae/Portal%20Sebrae/UFs/SP/Pesquisas/dados_mpes_brasil_2014.pdf
+http://www.sebrae.com.br/sites/PortalSebrae/ufs/sp/sebraeaz/pequenos-negocios-em-numeros,12e8794363447510VgnVCM1000004c00210aRCRD
+
+Dados Atualizados:
+http://www.sebrae.com.br/Sebrae/Portal%20Sebrae/UFs/SP/Pesquisas/Panorama_dos_Pequenos_Negocios_2018_AF.pdf
