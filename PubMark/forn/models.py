@@ -34,7 +34,6 @@ UF_LIST = (
     )
 
 
-
 class Uasg(models.Model):
     id = models.ObjectIdField()
     nome = models.CharField(max_length=200)

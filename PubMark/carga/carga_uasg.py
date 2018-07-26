@@ -55,8 +55,9 @@ def jsonReconstruct(jsonDict):
 
 
 j=0
+docCount=1
 count = j*500 + 1
-while j < 784:
+while j < docCount:
     f = open('uasgfixture.json', 'a')
 
     # URL para acesso aos dados (usar offset para variar)
@@ -79,16 +80,20 @@ while j < 784:
         # O resultado é guardado como uma string(s)
         s = r.text
 
+        if(j==0):
+            # Pegando a quantidade de documentos
+            docCount = int(s[-6:-1])
+
         # verifica se o offset transbordou a qtde de documentos ou se o servidor respondeu a requisicao sem sucesso
         if s[0] == '<':
-            print("ACABOUUUUUU!!! ou o servidor respondeu a requisicao sem sucesso")
+            print("o servidor respondeu a requisicao sem sucesso")
             sucesso = bool(0)
 
     # verifica se o server respondeu a requisição com sucesso
     if sucesso:
-
         # Agora eu vou "quebrar" a string em uma lista de strings com o split"
         l = s.split('{"id"')
+
 
         # Removendo primeiro item  = cabeçalho
         l.pop(0)
@@ -96,9 +101,9 @@ while j < 784:
         #Removendo 'resto' no ultimo item = contador de itens
 
         if j == 0:
-            l[-1] = l[-1][:-17]
+            l[-1] = l[-1][:-16]
         else:
-            l[-1] = l[-1][:-(27 + len(str(j*500)))]
+            l[-1] = l[-1][:-(26 + len(str(j*500)))]
 
         # adicionando '{"id"' que se perdeu no split
         l = ['{"id"'+i[:-1] for i in l]
@@ -106,7 +111,7 @@ while j < 784:
         L = []  # lista final
 
         print("----------new offset:" + str(count) + " - " + str(j) + " - " + str(j/784) + " Len:" + str(len(l)))
-
+        print(l[499])
         for i in l:
             jsonDict = json.loads(i)
             obj = {
