@@ -159,6 +159,11 @@ Dados das participação das Pequenas empresas no Brasil:
 http://www.sebrae.com.br/Sebrae/Portal%20Sebrae/UFs/SP/Pesquisas/dados_mpes_brasil_2014.pdf
 http://www.sebrae.com.br/sites/PortalSebrae/ufs/sp/sebraeaz/pequenos-negocios-em-numeros,12e8794363447510VgnVCM1000004c00210aRCRD
 
+DADOS USADOS NA RESPOSTA DO FORMULÁRIO:
+Sicaf só 80% participa - https://drive.google.com/file/d/1EcDFWBGihp5oIlXpE5j_AlVW8QQ0kj56/view
+Número de Pequenos negócios (250 mil)  -  http://comprasnet.gov.br/ajuda/siasg/numeros/GraficoTipo.asp
+4,2% dos pequenos negócio no rio - http://datasebrae.com.br/perfil-dos-pequenos-negocios/
+
 Dados Atualizados - Dados bem interessantes de SP :
 http://www.sebrae.com.br/Sebrae/Portal%20Sebrae/UFs/SP/Pesquisas/Panorama_dos_Pequenos_Negocios_2018_AF.pdf
 https://www.slideshare.net/OficinadoTextoAssess/caf-com-seguro-seguro-empresarial-e-pmes-7032017-72941510
