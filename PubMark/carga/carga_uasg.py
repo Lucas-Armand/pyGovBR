@@ -111,7 +111,6 @@ while j < docCount:
         L = []  # lista final
 
         print("----------new offset:" + str(count) + " - " + str(j) + " - " + str(j/784) + " Len:" + str(len(l)))
-        print(l[499])
         for i in l:
             jsonDict = json.loads(i)
             obj = {
