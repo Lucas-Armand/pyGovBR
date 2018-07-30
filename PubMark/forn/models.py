@@ -49,6 +49,7 @@ class Uasg(models.Model):
 class Fornecedor(models.Model):
     id = models.ObjectIdField()
     cnpj = models.CharField(max_length=20)
+    cpf = models.CharField(max_length=20)
     nome = models.CharField(max_length=200)
     ativo = models.BooleanField(default=False)
     recadastrado = models.BooleanField(default=False)
@@ -65,10 +66,7 @@ class Declaracao(models.Model):
     id = models.ObjectIdField()
     numero = models.CharField(max_length=10)
     id_uasg = models.ForeignKey(Uasg, on_delete=models.CASCADE)
-    id_fornecedor = models.ArrayReferenceField(
-        to=Fornecedor,
-        on_delete=models.CASCADE,
-    )
+    id_fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE)
 
 
 
