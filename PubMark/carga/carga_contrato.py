@@ -1,9 +1,5 @@
-from _codecs import latin_1_encode
-
-import pandas as pd
 import json
 import requests
-import pprint
 
 # Esse método recebe um dicionário e transforma em uma lista
 def jsonReconstruct(jsonDict):
@@ -23,33 +19,51 @@ def jsonReconstruct(jsonDict):
 
 # Agora vou iniciar um loop para editar essas strings
 
+j=0
+offsetMax = 1
+pkCount = 1
+fixtureCount = -1
+while j <= offsetMax:
 
-
-
-
-j=207
-count = j*500 + 1
-while j < 784:
-    f = open('fornfixture.json', 'a')
+    #offset de 500 documentos por acesso
+    offsetSize = 500
+    offset = j*offsetSize
 
     # URL para acesso aos dados (usar offset para variar)
-    url = 'http://compras.dados.gov.br/fornecedores/v1/fornecedores.json?offset=' + str(j*500)
+    url = 'http://compras.dados.gov.br/contratos/v1/contratos.json?offset=' + str(offset)
     print(url)
 
     # Fazendo o request do servidor
-    r = requests.get(url)
+    sucesso = bool(1)
+    sucessoRequest = bool(1)
+    try:
+        r = requests.get(url)
+    except requests.exceptions.Timeout:
+        print('timeout')
+        sucessoRequest = bool(0)
+    except requests.exceptions.ConnectionError:
+        print('verifique conexão com a internet')
+        sucessoRequest = bool(0)
 
-    # O resultado é guardado como uma string(s)
-    s = r.text
+    if sucessoRequest:
+        # O resultado é guardado como uma string(s)
+        s = r.text
 
-    # verifica se o offset transbordou a qtde de documentos
-    if s[1] == 'h':
-        break
+        if j==0:
+            # Pegando a quantidade de documentos
+            collectionSize = int(s[-6:-1])
+            offsetMax = int(collectionSize/500)
 
-    #verifica se o server respondeu a requisição com sucesso
-    if s[1] != '!':
+        # verifica se o offset transbordou a qtde de documentos ou se o servidor respondeu a requisicao sem sucesso
+        if s[0] == '<':
+            print("o servidor respondeu a requisicao sem sucesso")
+            sucesso = bool(0)
+
+    # verifica se o server respondeu a requisição com sucesso
+    if sucesso:
         # Agora eu vou "quebrar" a string em uma lista de strings com o split"
-        l = s.split('{"id"')
+        l = s.split('{"identificador"')
+
 
         # Removendo primeiro item  = cabeçalho
         l.pop(0)
@@ -62,21 +76,29 @@ while j < 784:
             l[-1] = l[-1][:-(27 + len(str(j*500)))]
 
         # adicionando '{"id"' que se perdeu no split
-        l = ['{"id"'+i[:-1] for i in l]
+        l = ['{"identificador"'+i[:-1] for i in l]
 
         L = []  # lista final
 
-        print("----------new offset:" + str(count) + " - " + str(j) + " - " + str(j/784) + " Len:" + str(len(l)))
+        print("----------new offset: " + str(pkCount) + " - " + str(j) + " - " + str(j/offsetMax) + " Len:" + str(len(l)))
+
+        fixtureSize = 10000
+        if pkCount % fixtureSize == 1:
+            fixtureCount += 1
+            f = open('contratofixture (' + str(fixtureCount) + ').json', 'w')
+        else:
+            f = open('contratofixture (' + str(fixtureCount) + ').json', 'a')
 
         for i in l:
             jsonDict = json.loads(i)
             obj = {
-                "model": "forn.fornecedor",
-                "pk":  count,
+                "model": "forn.contrato",
+                "pk":  pkCount,
                 "fields": jsonDict
                 }
             L.append(obj)
-            count += 1
+            pkCount += 1
+
         print("start writing")
         f.write(json.dumps(L))
         f.close()
