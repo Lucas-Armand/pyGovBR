@@ -62,6 +62,9 @@ class Fornecedor(models.Model):
     id_unidade_cadastradora = models.IntegerField(blank=True, null=True)
     habilitado_licitar = models.BooleanField(default=False)
 
+    def filter_declaracao(self):
+        return list(Declaracao.objects.filter(id_fornecedor_id = self.id))
+        
 class Declaracao(models.Model):
     id = models.ObjectIdField()
     numero = models.CharField(max_length=10)
