@@ -1,4 +1,4 @@
-from .models import Uasg, Fornecedor, Pregao
+from models import Uasg, Fornecedor, Declaracao, Contrato
 from pymongo import MongoClient
 
 client = MongoClient('localhost', 27017)

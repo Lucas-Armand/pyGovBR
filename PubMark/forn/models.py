@@ -45,11 +45,17 @@ class Uasg(models.Model):
     unidade_cadastradora = models.BooleanField(default=False)
     ativo = models.BooleanField(default=False)
 
+class UasgManager(models.Manager):
+    def create_uasg(self, id, nome):
+        book = self.create(title=title)
+        # do something with the book
+        return book
+
 
 class Fornecedor(models.Model):
     id = models.ObjectIdField()
     cnpj = models.CharField(max_length=20)
-    cpf = models.CharField(max_length=20)
+    cpf = models.CharField(max_length=20, null=True)
     nome = models.CharField(max_length=200)
     ativo = models.BooleanField(default=False)
     recadastrado = models.BooleanField(default=False)
@@ -68,8 +74,27 @@ class Fornecedor(models.Model):
 class Declaracao(models.Model):
     id = models.ObjectIdField()
     numero = models.CharField(max_length=10)
-    id_uasg = models.ForeignKey(Uasg, on_delete=models.CASCADE)
-    id_fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE)
+    uasg = models.ForeignKey(Uasg, on_delete=models.CASCADE)
+    fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE)
+
+class Contrato(models.Model):
+    id = models.ObjectIdField()
+    identificador = models.CharField(max_length=20)
+    uasg = models.ForeignKey(Uasg, on_delete=models.CASCADE)
+    modalidade_licitacao = models.IntegerField(blank=True, null=True)
+    numero_aviso_licitacao = models.IntegerField(blank=True, null=True)
+    codigo_contrato: models.IntegerField(blank=True, null=True)
+    licitacao_associada = models.CharField(max_length=20)
+    origem_licitacao = models.CharField(max_length=20)
+    numero = models.IntegerField(blank=True, null=True)
+    objeto = models.CharField(max_length=100)
+    numero_processo = models.CharField(max_length=20)
+    cnpj_contratada = models.CharField(max_length=20)
+    data_assinatura = models.DateField(auto_now=False, auto_now_add=False)
+    fundamento_legal = models.CharField(max_length=200)
+    data_inicio_vigencia = models.DateField(auto_now=False, auto_now_add=False)
+    data_termino_vigencia = models.DateField(auto_now=False, auto_now_add=False)
+    valor_inicial = models.IntegerField(blank=True, null=True)
 
 
 
