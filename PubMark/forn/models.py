@@ -71,7 +71,7 @@ class Fornecedor(models.Model):
         return list(Declaracao.objects.filter(id_fornecedor = self.id))
 
     def filter_rival(self):
-        # Essa funcaÃao retorna um dicionario com todos os fornecedores que ja
+        # Essa funcaï¿½ao retorna um dicionario com todos os fornecedores que ja
         # competiram com 'self' em algum pregao.
 
         # Construimos uma lista com todas as declaracoes de participacao de
@@ -120,6 +120,7 @@ class Contrato(models.Model):
     id = models.ObjectIdField()
     identificador = models.CharField(max_length=20)
     uasg = models.ForeignKey(Uasg, on_delete=models.CASCADE)
+    fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE)
     modalidade_licitacao = models.IntegerField(blank=True, null=True)
     numero_aviso_licitacao = models.IntegerField(blank=True, null=True)
     codigo_contrato= models.IntegerField(blank=True, null=True)
