@@ -71,8 +71,11 @@ class Fornecedor(models.Model):
         return list(Declaracao.objects.filter(id_fornecedor = self.id))
 
     def filter_rival(self):
-        # Essa funcaï¿½ao retorna um dicionario com todos os fornecedores que ja
-        # competiram com 'self' em algum pregao.
+        # Essa funcão retorna um dicionario com todos os fornecedores que ja
+        # competiram com 'self' em algum pregao. O dicionário é estruturado
+        # por:
+            # count -> Número de vezes que a empresa concorreu com "self"
+            # obj -> Que é o objeto fornecedor relacionado á empresa
 
         # Construimos uma lista com todas as declaracoes de participacao de
         # pregao de self:
@@ -100,7 +103,89 @@ class Fornecedor(models.Model):
                     concorrentes[nome]['obj']=concorrente
         return concorrentes
 
+    def filter_contrato(self):       
+        # Essa funcão retorna uma lista de objetos "Contrato" com todos os
+        # contratos relacionado ao cnpj de "self"
 
+        cnpj = self.cnpj
+        contratos = list(Contrato.objects.filter(cnpj_contratada = cnpj))
+        return contratos
+
+    def indicadores(self):
+        # Esse método retorna um dicionário com os principais indicadores sobre
+        # participação de licitações e contratos de self.
+
+        # Acessando dados:
+        declaracoes = self.filter_declaracao()
+        contratos = self.filter_contrato()
+
+        ### Processando dados
+        
+        # Contagem do número de pregões participados:
+        n_pregoes_participados = len(declaracoes)
+        
+        # Calculando numero de pregoes vencidos:
+        codigo_pregoes_participados = [declaracao.numero for declaracao in declaracoes]
+        contagem_pregoes_vencidos = 0
+        for contrato in contratos:
+            if contrato.numero_aviso_licitacao in codigo_pregoes_participados:
+                contagem_pregoes_vencidos += 1
+
+        # Calculo do valor médio dos contratos:
+        valores_dos_contratos = [contrato.valor_inicial if contrato.valor_inicial!= None else 0 for contrato in contratos]
+        if len(contratos)>0:
+            valor_medio_contratos = sum(valores_dos_contratos)/len(contratos)
+        else:
+            valor_medio_contratos = 0
+
+        # Calculando a frequencia de contratos por ano:
+        contratos_por_ano = {}
+        ano_contratos = [contrato.data_assinatura.year for contrato in contratos]
+        anos = set(ano_contratos)
+        for ano in anos:
+            contratos_por_ano[ano] = ano_contratos.count(ano)
+        
+        # Calculando a frequencia das modalidades de licitação dos contratos:
+        contratos_por_modalidade = {}
+        modalidade_contratos = [contrato.modalidade_licitacao for contrato in contratos]
+        modalidades = set(modalidade_contratos)
+        for modalidade in modalidades:
+            contratos_por_modalidade[modalidade] = modalidade_contratos.count(modalidade)
+
+
+        ### Output:
+        indicadores = {
+                'NUMERO DE PREGOES PARTICIPADOS': n_pregoes_participados,
+                'NUMERO DE PREGOES VENCIDOS':contagem_pregoes_vencidos,
+                'VALOR MEDIO DE CONTRATOS':valor_medio_contratos,
+                'FREQUENCIA DE CONTRATOS POR ANO':contratos_por_ano,
+                'FREQUENCIA DE CONTRATOS POR MODALIDADE DE LICITACAO':contratos_por_modalidade,
+                }
+        return indicadores
+
+    def indicadores_rivais(self):
+        # Esse método retorna um dicionário com os principais indicadores sobre
+        # participação de licitações e contratos dos rivais de self.
+        
+        # Acessando informação "nome" do dicionário resultante "filter_rival":
+        dict_rivais = self.filter_rival()
+        nomes_rivais = dict_rivais.keys()
+
+        # Contruindo dicionário output:
+        rivais_indicadores = {}
+        for nome in nomes_rivais:
+            # Acessando informação objeto do dicionário resultante
+            # "filter_rival":
+            objeto_fornecedor_rival = dict_rivais[nome]['obj']
+
+            # Aplicando o método "indicadores" em rival:
+            indicadores_rival = objeto_fornecedor_rival.indicadores()
+
+            # Adicionando informações ao output
+            rivais_indicadores[nome] = {}
+            rivais_indicadores[nome]['ind'] = indicadores_rival
+            rivais_indicadores[nome]['obj'] = objeto_fornecedor_rival
+        return rivais_indicadores
         
 class Declaracao(models.Model):
     id = models.ObjectIdField()
@@ -116,11 +201,16 @@ class Declaracao(models.Model):
         fornecedores_concorrente = [Fornecedor.objects.get(id=d.id_fornecedor_id) for d in declaracoes_concorrentes]
         return fornecedores_concorrente
 
+    def filter_contrato(self):
+        # Essa funcão retorna uma lista de objetos "Contrato" com todos os contratos relacionados ao pregao dessa declaração
+
+        contratos_pregao= list(Contrato.objects.filter(numero_aviso_licitacao=self.numero,uasg=self.id_uasg_id))
+        return contratos_pregao
+
 class Contrato(models.Model):
     id = models.ObjectIdField()
     identificador = models.CharField(max_length=20)
     uasg = models.ForeignKey(Uasg, on_delete=models.CASCADE)
-    fornecedor = models.ForeignKey(Fornecedor, on_delete=models.CASCADE)
     modalidade_licitacao = models.IntegerField(blank=True, null=True)
     numero_aviso_licitacao = models.IntegerField(blank=True, null=True)
     codigo_contrato= models.IntegerField(blank=True, null=True)
@@ -135,12 +225,4 @@ class Contrato(models.Model):
     data_inicio_vigencia = models.DateField(auto_now=False, auto_now_add=False)
     data_termino_vigencia = models.DateField(auto_now=False, auto_now_add=False)
     valor_inicial = models.IntegerField(blank=True, null=True)
-
-
-
-
-
-
-
-
 
