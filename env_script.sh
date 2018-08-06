@@ -13,15 +13,15 @@
 ## Clone Github Project
 
 # Install Anaconda:
-# wget "https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh"
-# bash ./Anaconda3-5.2.0-Linux-x86_64.sh -b
+wget "https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh"
+bash ./Anaconda3-5.2.0-Linux-x86_64.sh -b
 
 # Install Mongo:
-#sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
-#echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
-#sudo apt-get update
-#sudo apt-get install -y mongodb-org
-#sudo service mongod start
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo service mongod start
 
 # Criando Ambiente no Conda:
 conda create --name caranda -y
@@ -46,9 +46,11 @@ pip3 install djongo
 git clone https://github.com/Lucas-Armand/pyGovBR.git
 
 # Executing mongod
-sudo service mongod stop
+sudo service mongod start
 
 # Executando Django
 cd pyGovBR/PubMark
 python manage.py runserver
+
+
 
