@@ -20,7 +20,7 @@ def jsonReconstruct(jsonDict):
 # Agora vou iniciar um loop para editar essas strings
 
 j=0
-offsetMax = 1
+offsetMax = j
 pkCount = 1
 fixtureCount = -1
 while j <= offsetMax:
@@ -49,9 +49,10 @@ while j <= offsetMax:
         # O resultado é guardado como uma string(s)
         s = r.text
 
-        if j==0:
+        if j == 0:
             # Pegando a quantidade de documentos
-            collectionSize = int(s[-6:-1])
+            collectionSize = int(s[-7:-1])
+            print("qtd docs para download: " + str(collectionSize))
             offsetMax = int(collectionSize/500)
 
         # verifica se o offset transbordou a qtde de documentos ou se o servidor respondeu a requisicao sem sucesso
