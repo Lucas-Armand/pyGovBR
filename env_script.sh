@@ -29,18 +29,17 @@ conda create --name caranda -y
 # Acessando Ambiente Caranda
 source activate caranda
 
-# Install pip3
-sudo apt-get install python3-pip -y
-pip3 install --upgrade pip
+# Upgradin pip
+pip install --upgrade pip
 
 # Instal PyMongo
-sudo pip3 install pymongo
+sudo pip install pymongo
 
 # Install Django
-pip3 install Django
+pip install Django
 
 # Install Djongo
-pip3 install djongo
+pip install djongo
 
 # Cloning Project:
 git clone https://github.com/Lucas-Armand/pyGovBR.git
