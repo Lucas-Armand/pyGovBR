@@ -27,7 +27,7 @@ def index(request):
             return redirect("detail",CNPJ = cnpj)
         
     # Lidando com acesso "inicial", que deve selecionar um CNPJ:
-    template = loader.get_template('dashboard/form.html')
+    template = loader.get_template('dashboard\\\\form.html')
     context = {}
     return HttpResponse(template.render(context, request))
 

@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'forn',
+    'dashboard',
+    'viztest.apps.ViztestConfig'
 ]
 
 MIDDLEWARE = [
@@ -75,9 +77,12 @@ WSGI_APPLICATION = 'PubMark.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
+
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'caranda',
+        # 'HOST': '192.168.1.25',
+        'HOST': 'localhost',
     }
 }
 

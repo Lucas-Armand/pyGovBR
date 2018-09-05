@@ -20,4 +20,5 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('forn/', include('forn.urls')),
     path('admin/', admin.site.urls),
+    path('viztest/', include('viztest.urls')),
 ]

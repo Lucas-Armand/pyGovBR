@@ -33,10 +33,10 @@ while j < 784:
     f = open('fornfixture.json', 'a')
 
     # URL para acesso aos dados (usar offset para variar)
-    url = 'http://compras.dados.gov.br/fornecedores/v1/fornecedores.json?offset=' + str(j*500)
+    url = 'http://compras.dgov.br/fornecedores/v1/fornecedores.json?offset=' + str(j*500)
     print(url)
 
-    # Fazendo o request do servidor
+    # Fazendo o request do servidorados.
     r = requests.get(url)
 
     # O resultado é guardado como uma string(s)
