@@ -1,0 +1,125 @@
+{% load staticfiles %}
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<html>
+	<head>	
+		<title>DashBoard</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type ="text/css" href="{% static 'css/dashboard.css' %}">
+		<script language="JavaScript" type="text/javascript" src="{% static 'js/dashboard.js' %}"></script>
+		<script src="https://d3js.org/d3.v5.min.js"></script>
+	    <script language="JavaScript" type="text/javascript" src="{% static 'js/nv.d3.min.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	</head>
+	<body style="font-family:Verdana;color:#aaaaaa;">
+    <div style="overflow:auto">
+        <form> 
+            <h style="font-size:2vw;color:black">{{nome_empresa}}({{cnpj}})</h>
+            <input type="button" value="Voltar" onClick="history.go(-1)"> 
+            <input type="button" value="Avançar" onCLick="history.forward()"> 
+            <input type="button" value="Atualizar" onClick="history.go(0)"> 
+            <input type="button" value="Home" onClick=""> 
+        </form>
+    <div>
+	<div style="overflow:auto">
+		<div class="left_box">
+			<h style="font-size:20">{{ nome_1 }}</h>
+            <h1 style="font-size:3vw">{{ valor_contrato_ano }}</h1>
+		</div>
+
+		<div class="center_box">
+			<h style="font-size:20">{{ nome_2 }}</h>
+			<h1 style="font-size:3vw">{{ n_contrato_ano }}</h1>
+		</div>
+
+		<div class="right_box">
+			<h style="font-size:20">{{ nome_3 }}</h>
+			<h1 style="font-size:3vw">{{duracao_contratos_mes}}</h1>
+		</div>
+
+
+	</div>
+
+	<div style="overflow:auto">
+
+		<div class="big_container">
+			<h2>Mapa</h2>
+			<p>Mapa de contratos realizados por estado.</p>
+			<div id="chart_div"></div>
+			<script>
+			google.load('visualization', '1', {
+			  'packages': ['geochart', 'table']
+			});
+			google.setOnLoadCallback(drawRegionsMap);
+			</script>
+
+		</div>	
+		<div>
+			<div class="container">
+				<p>UASG com maior número de contratos</p>
+                <canvas id="donutchart" width="350" height="150"></canvas>
+
+                <script>
+                data = {
+                    datasets: [{
+                        data: [12, 10, 8,4,20],
+                        backgroundColor: ["#fc731a","#c8a21f","#af9131","#3b84bd","#142baa"]
+
+                    }],
+
+                    // These labels appear in the legend and in the tooltips when hovering different arcs
+                    labels: [
+                        'SUP. INTENDECIA REG. DO EST. DE SP',
+                        'UNID. REG. DE SP - ANAC',
+                        'MF - DELEGACIA DA RECEITA FEDERAL',
+                        'GERENCIA EXECUTIVA ARAÇATUBA/DP',
+                        'Outros'
+                    ]
+                };
+
+                LoadDoughnutChart('donutchart',data);
+                </script>
+			</div>
+			<div class="mini_container">
+				<p>Número de contratos por ano</p>
+				<svg class=svg id="barchart1" width="350" height="150" ></svg>
+				<script> 
+					var data = [
+					  {ano: "2015", contratos: 14},
+					  {ano: "2016", contratos: 18},
+					  {ano: "2017", contratos: 21},
+					  {ano: "2018", contratos: 14}
+					];
+
+					LoadBarChart('barchart1',data,'ano','contratos'); 
+				</script>
+            </div>
+        </div>
+        <div class="mini_container">
+		<p>Número de contratos por modalidade </p>
+		<svg class=svg id="barchart2" width="350" height="150" ></svg>
+		<script> 
+			var data = [
+			  {modalidade: "dispensa", contratos: 4},
+			  {modalidade: "pregão eletrônico", contratos: 42},
+			];
+
+			LoadBarChart('barchart2',data,'modalidade','contratos');
+		</script>
+		</div>
+	</div>  
+	</body>
+</html>
+
+<!DOCTYPE html>
+
+
+
+<!--
+para consultas futuras:
+http://jsfiddle.net/KS7L2/
+-->

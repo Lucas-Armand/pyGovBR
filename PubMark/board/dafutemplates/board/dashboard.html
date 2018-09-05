@@ -1,0 +1,18 @@
+<!--
+ESSE E O NOSSO ARQUIVO
+-->
+
+{% extends "base.html" %}
+
+{% load staticfiles %}
+{% load render_bundle from webpack_loader %}
+
+{% block stylesheets %}
+  {% render_bundle asset_chunk 'css' %}
+{% endblock %}
+
+{% block javascript %}
+  {% render_bundle asset_chunk 'js' %}
+{% endblock %}
+
+

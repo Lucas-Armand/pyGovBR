@@ -1,0 +1,133 @@
+/* general/layout css code */
+
+* {
+  box-sizing: border-box;
+  align:center;
+}
+
+.left_box {
+  margin: 0.1%;
+  background-color:#2196F3;
+  padding:10px;
+  text-align:center;
+  float:left;
+  color:#ffffff;
+  width:33%; /* The width is 20%, by default */
+}
+
+.center_box {
+  margin: 0.1%;
+  background-color:#d12e2e;
+  padding:10px;
+  text-align:center;
+  float:left;
+  color:#ffffff;
+  width:33%; /* The width is 60%, by default */
+}
+
+.right_box {
+  margin: 0.1%;
+  background-color:#4CAF50;
+  padding:10px;
+  text-align:center;
+  float:left;
+  color:#ffffff;
+  width:33%; /* The width is 20%, by default */
+}
+
+.big_container {
+  margin: 0.1%;
+  background-color:#e5e5e5;
+  float:left;
+  width:50%;
+  height:550px;
+  padding:0 30px;
+  text-align:center;
+  overflow: hidden;
+  color:#000000;
+}
+
+.container {
+  margin: 0.1%;
+  background-color:#e5e5e5;
+  float:left;
+  width:49%;
+  height: 340;
+  padding:0 30px;
+  margin-top:7px;
+  text-align:center;
+  overflow: hidden;
+  color:#000000;
+}
+.mini_container {
+  margin: 0.4%;
+  background-color:#e5e5e5;
+  float:left;
+  width:24%;
+  height: 200px;
+  padding:0 30px;
+  margin-top:7px;
+  text-align:center;
+  color:#000000;
+  overflow: hidden;
+}
+
+
+/* bar chart css code */
+
+.rect {
+  fill: steelblue;
+}
+
+.rect:hover {
+  fill: brown;
+}
+
+.title {
+  font: bold 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.svg{
+    margin-left:-50;
+}
+
+
+@media only screen and (max-width:620px) {
+  /* For mobile phones: */
+  .menu, .big_container, .container, .mini_container {
+    width:96%;
+  }
+}
+
+/* pie chart css code */
+.legend rect {
+	fill:white;
+	opacity:0.4;
+}
+
+path.slice {
+	transition: fill-opacity .4s ease;
+}
+
+.slice-label {
+    cursor: pointer;
+}
+
+
+
+
