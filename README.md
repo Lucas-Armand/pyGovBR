@@ -137,9 +137,10 @@ https://nesdis.github.io/djongo/different-ways-to-integrate-django-with-mongodb/
 https://www.irit.fr/publis/SIG/2015_DAWAK_CEKTT.pdf
 http://www.academia.edu/16859114/Benchmark_for_OLAP_on_NoSQL_Technologies_Comparing
 ### Django
+https://docs.djangoproject.com/en/2.0/intro/tutorial01/
 https://www.quora.com/How-can-I-use-MongoDB-and-a-relational-RDBMS-in-my-Django-website
 https://djangobook.com/model-view-controller-design-pattern/
-https://docs.djangoproject.com/en/2.0/intro/tutorial01/
+
 ### pycharm
 https://www.jetbrains.com/help/pycharm-edu/adding-existing-virtual-environment.html
 ### py
