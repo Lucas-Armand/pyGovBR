@@ -136,6 +136,8 @@ https://blog.umbler.com/br/boas-praticas-com-mongodb/
 https://nesdis.github.io/djongo/different-ways-to-integrate-django-with-mongodb/
 https://www.irit.fr/publis/SIG/2015_DAWAK_CEKTT.pdf
 http://www.academia.edu/16859114/Benchmark_for_OLAP_on_NoSQL_Technologies_Comparing
+https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/
+
 ### Django
 https://docs.djangoproject.com/en/2.0/intro/tutorial01/
 https://www.quora.com/How-can-I-use-MongoDB-and-a-relational-RDBMS-in-my-Django-website
