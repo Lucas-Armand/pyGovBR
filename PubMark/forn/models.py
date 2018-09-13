@@ -43,6 +43,7 @@ class Uasg(models.Model):
     total_fornecedores_cadastrados = models.IntegerField(blank=True, null=True)
     unidade_cadastradora = models.BooleanField(default=False)
     ativo = models.BooleanField(default=False)
+    uf = models.CharField(max_length=3, choices=UF_LIST)
 
 class UasgManager(models.Manager):
     def create_uasg(self, id, nome):
