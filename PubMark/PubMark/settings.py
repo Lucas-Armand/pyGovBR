@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'forn',
     'dashboard',
-    'viztest.apps.ViztestConfig'
+    # 'viztest.apps.ViztestConfig'
 ]
 
 MIDDLEWARE = [
@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'caranda',
-        # 'HOST': '192.168.1.25',
-        'HOST': 'localhost',
+        'HOST': '192.168.1.25',
+        # 'HOST': 'localhost',
     }
 }
 
