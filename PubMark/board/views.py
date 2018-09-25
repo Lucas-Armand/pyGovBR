@@ -24,7 +24,8 @@ def index(request):
             cnpj = re.sub('\.|/|-','',cnpj_punctification)
             fornecedor = Fornecedor.objects.get(cnpj = cnpj)
             ind = fornecedor.indicadores()
-
+            ind['NUMERO MEDIO DE CONTRATO POR ANO'] = ''
+            ind['DURACAO MEDIA DOS CONTRATOS (MES)'] = ''
             # return redirect("/dash")
             # return redirect("detail",CNPJ = cnpj)
 

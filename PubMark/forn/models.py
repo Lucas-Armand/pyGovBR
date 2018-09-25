@@ -43,7 +43,8 @@ class Uasg(models.Model):
     total_fornecedores_cadastrados = models.IntegerField(blank=True, null=True)
     unidade_cadastradora = models.BooleanField(default=False)
     ativo = models.BooleanField(default=False)
-    uf = models.CharField(max_length=3, choices=UF_LIST)
+    #uf = models.CharField(max_length=3, choices=UF_LIST)
+    # essa linha de cima faz um erro muito louco
 
 class UasgManager(models.Manager):
     def create_uasg(self, id, nome):
@@ -154,12 +155,12 @@ class Fornecedor(models.Model):
             contratos_por_modalidade[modalidade] = modalidade_contratos.count(modalidade)
 
         # Calculando a frequencia de contratos por uasg:
-        contratos_por_uasg = {}
-        uasg_conratos = [contrato.uasg.nome for contrato in contratos]
-        uasgs = set(uasg_contratos)
-        for uasg in uasgs:
-            contratos_por_uasg[uasg.nome] = uasg_conratos.count(uasg.nome)
-        sorted_contratos_por_uasg = sorted(contratos_por_uasg.items(), key=lambda kv: kv[1], reverse=True)
+        #contratos_por_uasg = {}
+        #uasg_conratos = [contrato.uasg.nome for contrato in contratos]
+        #uasgs = set(uasg_contratos)
+        #for uasg in uasgs:
+        #    contratos_por_uasg[uasg.nome] = uasg_conratos.count(uasg.nome)
+        #sorted_contratos_por_uasg = sorted(contratos_por_uasg.items(), key=lambda kv: kv[1], reverse=True)
 
 
 
@@ -171,7 +172,7 @@ class Fornecedor(models.Model):
                 'VALOR MEDIO DE CONTRATOS':valor_medio_contratos,
                 'FREQUENCIA DE CONTRATOS POR ANO':contratos_por_ano,
                 'FREQUENCIA DE CONTRATOS POR MODALIDADE DE LICITACAO':contratos_por_modalidade,
-                'FREQUENCIA DE CONTRATOS POR UASG': sorted_contratos_por_uasg,
+                #'FREQUENCIA DE CONTRATOS POR UASG': sorted_contratos_por_uasg,
                 }
         return indicadores
 
