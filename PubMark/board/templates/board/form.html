@@ -18,7 +18,7 @@
 
 <form name="form1" action="/board/" method="post">{% csrf_token %}
   <div>
-    <label for="teste4">Entre com seu cnpj para descobrir: </label>
+      <label for="teste4">Entre com seu cnpj para descobrir: (Ex.: 00.097.117/0001-35)</label>
     <input type="text" name="cnpj" id="cnpj" onKeyPress="MascaraCNPJ(form1.cnpj);"
     maxlength="10" onBlur="ValidarCNPJ(form1.cnpj);" value="{{ current_name }}">
     <input type="submit" value="OK">

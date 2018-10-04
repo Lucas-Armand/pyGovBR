@@ -1,4 +1,6 @@
 from djongo import models
+import locale
+locale.setlocale( locale.LC_ALL, '' )
 
 
 
@@ -146,6 +148,22 @@ class Fornecedor(models.Model):
         anos = set(ano_contratos)
         for ano in anos:
             contratos_por_ano[ano] = ano_contratos.count(ano)
+
+        # Calculando numero medio de contratos por ano (media de todos anos):
+        n = len(anos)
+        media_n_contratos = sum([contratos_por_ano[ano] for ano in anos])/n
+
+        # Calculando a duracao media dos contratos em meses
+        #DURACAO MEDIA DOS CONTRATOS (MES)
+        delta_tempo_contratos = []
+        for contrato in contratos:
+            delta_tempo_contratos.append(
+                    contrato.data_termino_vigencia -
+                    contrato.data_inicio_vigencia
+                    )
+        delta_tempo_contratos = [delta.days/30 for delta in delta_tempo_contratos]
+        delta_tempo_contratos = sum(delta_tempo_contratos)/len(delta_tempo_contratos)
+
         
         # Calculando a frequencia das modalidades de licitação dos contratos:
         contratos_por_modalidade = {}
@@ -155,24 +173,45 @@ class Fornecedor(models.Model):
             contratos_por_modalidade[modalidade] = modalidade_contratos.count(modalidade)
 
         # Calculando a frequencia de contratos por uasg:
-        #contratos_por_uasg = {}
-        #uasg_conratos = [contrato.uasg.nome for contrato in contratos]
-        #uasgs = set(uasg_contratos)
-        #for uasg in uasgs:
-        #    contratos_por_uasg[uasg.nome] = uasg_conratos.count(uasg.nome)
-        #sorted_contratos_por_uasg = sorted(contratos_por_uasg.items(), key=lambda kv: kv[1], reverse=True)
-
-
-
+        contratos_por_uasg = {}
+        uasg_contratos = [contrato.uasg.nome for contrato in contratos]
+        uasgs = set(uasg_contratos)
+        for uasg in uasgs:
+            contratos_por_uasg[uasg] = uasg_contratos.count(uasg)
+        sorted_contratos_por_uasg = sorted(contratos_por_uasg.items(), key=lambda kv: kv[1], reverse=True)
+        n = len(sorted_contratos_por_uasg)
+        name = []
+        count = []
+        alfa = 0
+        N = 5 # numero de uasg apresentados (arbitrario)
+        for i in range(n):
+            if i < N:
+                name.append(sorted_contratos_por_uasg[i][0])
+                count.append(sorted_contratos_por_uasg[i][1])
+            else:
+                alfa += sorted_contratos_por_uasg[i][1]
+        if alfa != 0:
+            name.append('Outros')
+            count.append(alfa)
+        sorted_contratos_por_uasg_extruturado = {}
+        sorted_contratos_por_uasg_extruturado['name'] = name
+        sorted_contratos_por_uasg_extruturado['count'] = count
+                
 
         ### Output:
         indicadores = {
+                'NOME' : self.nome,
+                'CNPJ' : self.cnpj,
                 'NUMERO DE PREGOES PARTICIPADOS': n_pregoes_participados,
                 'NUMERO DE PREGOES VENCIDOS':contagem_pregoes_vencidos,
-                'VALOR MEDIO DE CONTRATOS':valor_medio_contratos,
+                'VALOR MEDIO DOS CONTRATOS':locale.currency(valor_medio_contratos,grouping=True),
                 'FREQUENCIA DE CONTRATOS POR ANO':contratos_por_ano,
                 'FREQUENCIA DE CONTRATOS POR MODALIDADE DE LICITACAO':contratos_por_modalidade,
-                #'FREQUENCIA DE CONTRATOS POR UASG': sorted_contratos_por_uasg,
+                'NUMERO MEDIO DE CONTRATOS POR ANO':"%.2f" %media_n_contratos,
+                'DURACAO MEDIA DOS CONTRATOS (MES)':"%.2f" %delta_tempo_contratos,
+                'FREQUENCIA DE CONTRATOS POR UASG': sorted_contratos_por_uasg_extruturado,
+
+                
                 }
         return indicadores
 

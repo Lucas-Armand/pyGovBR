@@ -27,7 +27,19 @@ function LoadCanvas(elementId, nome, valor, color){
 	//ctx.restore();
 }
 
-function LoadDoughnutChart(elementId,data){
+function LoadDoughnutChart(elementId,Data){
+
+	data = {
+		datasets: [{
+			data: Data['count'],
+			backgroundColor: ["#fc731a","#c8a21f","#af9131"]
+
+		}],
+
+		// These labels appear in the legend and in the tooltips when hovering different arcs
+		labels: Data['name']
+	};
+
 
 	var ctx = document.getElementById(elementId).getContext('2d');                  
 	var myDoughnutChart = new Chart(ctx, {                                          

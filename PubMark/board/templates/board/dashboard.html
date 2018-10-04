@@ -64,24 +64,8 @@
                 <canvas id="donutchart" width="350" height="150"></canvas>
 
                 <script>
-                data = {
-                    datasets: [{
-                        data: [12, 10, 8,4,20],
-                        backgroundColor: ["#fc731a","#c8a21f","#af9131","#3b84bd","#142baa"]
-
-                    }],
-
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: [
-                        'SUP. INTENDECIA REG. DO EST. DE SP',
-                        'UNID. REG. DE SP - ANAC',
-                        'MF - DELEGACIA DA RECEITA FEDERAL',
-                        'GERENCIA EXECUTIVA ARAÇATUBA/DP',
-                        'Outros'
-                    ]
-                };
-
-                LoadDoughnutChart('donutchart',data);
+                Data = {{ freq_contratos_uasg|safe }};
+                LoadDoughnutChart('donutchart',Data);
                 </script>
 			</div>
 			<div class="mini_container">

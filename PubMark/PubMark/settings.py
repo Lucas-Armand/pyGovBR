@@ -82,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'caranda',
-        'HOST': '192.168.1.25',
+        'HOST': '192.168.1.7',
         # 'HOST': 'localhost',
     }
 }
