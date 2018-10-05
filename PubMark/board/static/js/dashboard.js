@@ -32,7 +32,7 @@ function LoadDoughnutChart(elementId,Data){
 	data = {
 		datasets: [{
 			data: Data['count'],
-			backgroundColor: ["#fc731a","#c8a21f","#af9131"]
+			backgroundColor: ["#f4c309","#fd8609","#e04408","#d4191f","#ee2151","#f33d87","#ca4eb0","#7c57b1","#2266af","#15a4d6","#1cdeed","#1fedc9","#1fedc9","#408f0d","#a3bb07"]
 
 		}],
 
