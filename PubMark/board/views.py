@@ -37,9 +37,12 @@ def index(request):
                                         "valor_contrato_ano":  ind['VALOR MEDIO DOS CONTRATOS'],  
                                         "nome_2": "QUANTIDADE DE CONTRATOS POR ANO",
                                         "n_contrato_ano": ind['NUMERO MEDIO DE CONTRATOS POR ANO'],                  
-                                        "freq_contratos_uasg":json.dumps(ind['FREQUENCIA DE CONTRATOS POR UASG']),
                                         "nome_3": "DURAÇÃO MÉDIA DOS CONTRATOS (MESES)",
-                                        "duracao_contratos_mes": ind['DURACAO MEDIA DOS CONTRATOS (MES)']})  
+                                        "freq_contratos_uasg":json.dumps(ind['FREQUENCIA DE CONTRATOS POR UASG']),
+                                        "duracao_contratos_mes": ind['DURACAO MEDIA DOS CONTRATOS (MES)'],
+                                        "contratos_por_ano":ind['FREQUENCIA DE CONTRATOS POR ANO'],
+                                        "contratos_por_uf":ind['FREQUENCIA DE CONTRATOS POR ESTADO'],
+                                        "contratos_por_modalidade":ind["FREQUENCIA DE CONTRATOS POR MODALIDADE DE LICITACAO"],})  
         
     # Lidando com acesso "inicial", que deve selecionar um CNPJ:
     template = loader.get_template('board/form.html')

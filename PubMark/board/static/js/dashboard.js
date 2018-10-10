@@ -102,7 +102,9 @@ function LoadBarChart(elementId,data,key1,key2){
 
 	svg.append("g")
 	    .attr("transform", "translate(0," + y(0) + ")")
-	    .call(d3.axisBottom(x));
+	    .call(d3.axisBottom(x))
+	   .selectAll("text")
+		.attr("transform", "rotate(-10)" );
 
 	svg.append("g")
 	    .attr("transform", "translate(" + margin.left + ",0)")

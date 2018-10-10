@@ -72,13 +72,7 @@
 				<p>Número de contratos por ano</p>
 				<svg class=svg id="barchart1" width="350" height="150" ></svg>
 				<script> 
-					var data = [
-					  {ano: "2015", contratos: 14},
-					  {ano: "2016", contratos: 18},
-					  {ano: "2017", contratos: 21},
-					  {ano: "2018", contratos: 14}
-					];
-
+                    var data = {{ contratos_por_ano|safe }};
 					LoadBarChart('barchart1',data,'ano','contratos'); 
 				</script>
             </div>
@@ -87,11 +81,7 @@
 		<p>Número de contratos por modalidade </p>
 		<svg class=svg id="barchart2" width="350" height="150" ></svg>
 		<script> 
-			var data = [
-			  {modalidade: "dispensa", contratos: 4},
-			  {modalidade: "pregão eletrônico", contratos: 42},
-			];
-
+            var data = {{ contratos_por_modalidade|safe }};
 			LoadBarChart('barchart2',data,'modalidade','contratos');
 		</script>
 		</div>
@@ -104,47 +94,13 @@
 
 <script>
 
-
-
 google.load('visualization', '1', {
   'packages': ['geochart', 'table']
 });
 google.setOnLoadCallback(drawRegionsMap);
 
 function drawRegionsMap() {
-
-  var data = google.visualization.arrayToDataTable([
-    ['State', 'Contratos'],
-    ['Acre',0],
-    ['Alagoas',0],
-    ['Amapá',0],
-    ['Amazonas',0],
-    ['Bahia',0],
-    ['Ceará',0],
-    ['Distrito Federal',0],
-    ['Espírito Santo',3],
-    ['Goiás',0],
-    ['Maranhão',0],
-    ['Mato Grosso',0],
-    ['Mato Grosso do Sul',0],
-    ['Minas Gerais',7],
-    ['Pará',0],
-    ['Paraíba',0],
-    ['Paraná',10],
-    ['Pernambuco',0],
-    ['Piauí',0],
-    ['Rio de Janeiro',17],
-    ['Rio Grande do Norte',0],
-    ['Rio Grande do Sul',0],
-    ['Rondônia',0],
-    ['Roraima',0],
-    ['Santa Catarina',0],
-    ['São Paulo',23],
-    ['Sergipe',0],
-    ['Tocantins',0]
-
-  ]);
-
+  var data = google.visualization.arrayToDataTable({{contratos_por_uf|safe}})
   var geochart = new google.visualization.GeoChart(document.getElementById('chart_div'));
   var options = {
     region: 'BR',

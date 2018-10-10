@@ -34,6 +34,54 @@ UF_LIST = (
         ('TO', 'Tocantins'),
         )
 
+MODALIDADE_LICITACAO_LIST = {
+        None:"Desconhecido",
+        1:"CONVITE",                                                          
+        2:"TOMADA DE PRECOS",                                                 
+        3:"CONCORRENCIA",                                                     
+        4:"CONCORRENCIA INTERNACIONAL",                                       
+        5:"PREGAO",                                                           
+        6:"DISPENSA DE LICITACAO",                                            
+        7:"INEXIGIBILIDADE DE LICITACAO",                                     
+        20:"CONCURSO",                                                        
+        22:"TOMADA DE PRECOS POR TECNICA E PRECO",                            
+        33:"CONCORRENCIA POR TECNICA E PRECO",                                
+        44:"CONCORRENCIA INTERNACIONAL POR TECNICA E PRECO",                  
+        99:"RDC",                                                             
+        }
+
+CEP_ESTADO = {
+        20000:"São Paulo",
+        29000:"Rio de Janeiro",
+        30000:"Espirito Santo",
+        40000:"Minas Gerais",
+        49000:"Bahia",
+        50000:"Sergipe",
+        57000:"Pernambuco",
+        58000:"Alagoas",
+        59000:"Paraíba",
+        60000:"Rio Grande do Norte",
+        64000:"Ceará",
+        65000:"Piauí",
+        66000:"Maranhão",
+        68900:"Pará",
+        69300:"Amazonas",
+        69400:"Amapá",
+        69900:"Roraima",
+        70000:"Acre",
+        74000:"Distrito Federal",
+        76800:"Mato Grosso",
+        77000:"Goiás",
+        78000:"Tocantins",
+        79000:"Rondônia",
+        80000:"Mato Grosso do Sul",
+        88000:"Paraná",
+        90000:"Santa Catarina",
+        100000:"Rio Grande do Sul",
+        }
+
+ESTADOS = ["Acre","Alagoas","Amapá","Amazonas","Bahia","Ceará","Distrito Federal","Espirito Santo","Goiás","Maranhão","Mato Grosso","Mato Grosso do Sul","Minas Gerais","Pará","Paraíba","Paraná","Pernambuco","Piauí","Rio de Janeiro","Rio Grande do Norte","Rio Grande do Sul","Rondônia","Roraima","Santa Catarina","São Paulo","Sergipe","Tocantins"]
+ 
 
 class Uasg(models.Model):
     id = models.ObjectIdField()
@@ -47,6 +95,15 @@ class Uasg(models.Model):
     ativo = models.BooleanField(default=False)
     #uf = models.CharField(max_length=3, choices=UF_LIST)
     # essa linha de cima faz um erro muito louco
+
+    def uf(self):
+        prefixo = int(self.cep[0:-3])
+        keys = CEP_ESTADO.keys()
+        for cep_test in keys:
+            if prefixo<cep_test:
+                return(CEP_ESTADO[cep_test])
+        return(None)
+
 
 class UasgManager(models.Manager):
     def create_uasg(self, id, nome):
@@ -143,15 +200,19 @@ class Fornecedor(models.Model):
             valor_medio_contratos = 0
 
         # Calculando a frequencia de contratos por ano:
-        contratos_por_ano = {}
+        contratos_por_ano = []
         ano_contratos = [contrato.data_assinatura.year for contrato in contratos]
         anos = set(ano_contratos)
+        anos = sorted(anos)
         for ano in anos:
-            contratos_por_ano[ano] = ano_contratos.count(ano)
+            contratos_por_ano.append({
+                'ano':ano,
+                'contratos':ano_contratos.count(ano)
+                })
 
         # Calculando numero medio de contratos por ano (media de todos anos):
         n = len(anos)
-        media_n_contratos = sum([contratos_por_ano[ano] for ano in anos])/n
+        media_n_contratos = sum([n_contratos_por_ano['contratos'] for n_contratos_por_ano in contratos_por_ano])/n
 
         # Calculando a duracao media dos contratos em meses
         #DURACAO MEDIA DOS CONTRATOS (MES)
@@ -166,11 +227,15 @@ class Fornecedor(models.Model):
 
         
         # Calculando a frequencia das modalidades de licita��o dos contratos:
-        contratos_por_modalidade = {}
+        contratos_por_modalidade = []
         modalidade_contratos = [contrato.modalidade_licitacao for contrato in contratos]
         modalidades = set(modalidade_contratos)
         for modalidade in modalidades:
-            contratos_por_modalidade[modalidade] = modalidade_contratos.count(modalidade)
+            contratos_por_modalidade.append({
+                'modalidade':MODALIDADE_LICITACAO_LIST[modalidade],
+                'contratos':modalidade_contratos.count(modalidade)
+                })
+
 
         # Calculando a frequencia de contratos por uasg:
         contratos_por_uasg = {}
@@ -196,7 +261,13 @@ class Fornecedor(models.Model):
         sorted_contratos_por_uasg_extruturado = {}
         sorted_contratos_por_uasg_extruturado['name'] = name
         sorted_contratos_por_uasg_extruturado['count'] = count
-                
+
+        # Calculando o n�mero de contratos por uf:
+        contratos_por_uf = {}
+        uf_contratos = [contrato.uasg.uf() for contrato in contratos]
+        contagem_estados = [['State', 'Contratos']]
+        for uf in ESTADOS:
+            contagem_estados.append([uf,uf_contratos.count(uf)])
 
         ### Output:
         indicadores = {
@@ -206,12 +277,11 @@ class Fornecedor(models.Model):
                 'NUMERO DE PREGOES VENCIDOS':contagem_pregoes_vencidos,
                 'VALOR MEDIO DOS CONTRATOS':locale.currency(valor_medio_contratos,grouping=True),
                 'FREQUENCIA DE CONTRATOS POR ANO':contratos_por_ano,
+                'FREQUENCIA DE CONTRATOS POR ESTADO': contagem_estados,
                 'FREQUENCIA DE CONTRATOS POR MODALIDADE DE LICITACAO':contratos_por_modalidade,
                 'NUMERO MEDIO DE CONTRATOS POR ANO':"%.2f" %media_n_contratos,
                 'DURACAO MEDIA DOS CONTRATOS (MES)':"%.2f" %delta_tempo_contratos,
                 'FREQUENCIA DE CONTRATOS POR UASG': sorted_contratos_por_uasg_extruturado,
-
-                
                 }
         return indicadores
 
